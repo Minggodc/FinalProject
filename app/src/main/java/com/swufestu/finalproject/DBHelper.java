@@ -22,13 +22,13 @@ public class DBHelper extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-        db.execSQL("CREATE TABLE "+student+"(ID TEXT PRIMARY KEY, NAME TEXT, " +
+        db.execSQL("CREATE TABLE IF NOT EXISTS "+student+"(ID TEXT PRIMARY KEY, NAME TEXT, " +
                 "XUEYUAN TEXT, MAJOR TEXT, GRADE TEXT, PWD TEXT)");
-        db.execSQL("CREATE TABLE "+teacher+"(ID TEXT PRIMARY KEY, NAME TEXT, " +
+        db.execSQL("CREATE TABLE IF NOT EXISTS "+teacher+"(ID TEXT PRIMARY KEY, NAME TEXT, " +
                 "XUEYUAN TEXT, GRADE TEXT, TEL TEXT, PWD TEXT)");
-        db.execSQL("CREATE TABLE "+leave_request+"(ID TEXT, TEACHER_ID TEXT, " +
+        db.execSQL("CREATE TABLE IF NOT EXISTS "+leave_request+"(ID TEXT, TEACHER_ID TEXT, " +
                 "STARTTIME TEXT, ENDTIME TEXT, REASON TEXT, STU_TEL TEXT)");
-        db.execSQL("CREATE TABLE "+leave_request+"(ID TEXT, TEACHER_ID TEXT, " +
+        db.execSQL("CREATE TABLE IF NOT EXISTS "+leave_request+"(ID TEXT, TEACHER_ID TEXT, " +
                 "STARTTIME TEXT, ENDTIME TEXT, REASON TEXT, STU_TEL TEXT, CANCEL INTEGER)");
     }
 
