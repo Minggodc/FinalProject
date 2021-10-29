@@ -38,6 +38,8 @@ public class MainActivity extends AppCompatActivity {
 
     public void Login(View view) {
         if (ID.getText().toString().isEmpty()||password.getText().toString().isEmpty()){
+            Toast.makeText(MainActivity.this, "输入不能为空！！！", Toast.LENGTH_LONG).show();
+        }else{
             //判断学生还是导员
             choosen = findViewById(R.id.choosen);
             String choose = null;
@@ -71,17 +73,19 @@ public class MainActivity extends AppCompatActivity {
                 }
                 cursor.close();
             }else if(choose.equals("辅导员")){
-                Cursor cursor = db.rawQuery("select ID,PWD from teacher where ID=?",new String[]{ID.getText().toString().trim()});
+                Cursor cursor = db.rawQuery("select ID,PWD,XUEYUAN,NAME from teacher where ID=?",new String[]{ID.getText().toString().trim()});
                 if(cursor.moveToFirst()&&cursor!=null){
+                    String db_id = cursor.getString(0);
                     String pwd = cursor.getString(1);
+                    String xueyuan = cursor.getString(2);
+                    String db_name = cursor.getString(3);
                     if (pwd.equals(password.getText().toString().trim())){
                         //跳转页面到辅导员页
-
-
-
-
-
-
+                        Intent toRequest = new Intent(this, TeacherMain.class);
+                        toRequest.putExtra("ID",db_id);
+                        toRequest.putExtra("name",db_name);
+                        toRequest.putExtra("xueyuan",xueyuan);
+                        startActivityForResult(toRequest, 2);
                     }else{
                         Toast.makeText(MainActivity.this, "密码错误！！！", Toast.LENGTH_LONG).show();
                     }
@@ -93,8 +97,7 @@ public class MainActivity extends AppCompatActivity {
                 Toast.makeText(MainActivity.this, "登录失败！！！", Toast.LENGTH_LONG).show();
             }
             db.close();
-        }else{
-            Toast.makeText(MainActivity.this, "输入不能为空！！！", Toast.LENGTH_LONG).show();
+
         }
 
     }

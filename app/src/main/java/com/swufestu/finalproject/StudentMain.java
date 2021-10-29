@@ -28,17 +28,26 @@ public class StudentMain extends AppCompatActivity {
         xm.setText("姓名："+name);
     }
 
+    //申请
     public void request(View view){
         Intent toRequest = new Intent(this, RequestPage.class);
         toRequest.putExtra("ID",id);
-        startActivityForResult(toRequest, 2);
+        toRequest.putExtra("status","request");
+        startActivityForResult(toRequest, 3);
     }
 
+    //查看记录
     public void record(View view){
-
+        Intent toRequest = new Intent(this, StuRecord.class);
+        toRequest.putExtra("ID",id);
+        toRequest.putExtra("name",name);
+        startActivityForResult(toRequest, 4);
     }
 
+    //查看个人信息
     public void myInfo(View view){
-
+        Intent toRequest = new Intent(this, MyInfoPage.class);
+        toRequest.putExtra("ID",id);
+        startActivityForResult(toRequest, 5);
     }
 }
