@@ -3,16 +3,22 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/AndroidStudioProjects/FinalProject/app/src/main/res/layout/activity_change_pwd.xml" value="0.24583333333333332" />
         <entry key="..\:/AndroidStudioProjects/FinalProject/app/src/main/res/layout/activity_check_page.xml" value="0.24583333333333332" />
         <entry key="..\:/AndroidStudioProjects/FinalProject/app/src/main/res/layout/activity_detail.xml" value="0.24583333333333332" />
+        <entry key="..\:/AndroidStudioProjects/FinalProject/app/src/main/res/layout/activity_detail_query.xml" value="0.24583333333333332" />
+        <entry key="..\:/AndroidStudioProjects/FinalProject/app/src/main/res/layout/activity_detail_request.xml" value="0.24583333333333332" />
+        <entry key="..\:/AndroidStudioProjects/FinalProject/app/src/main/res/layout/activity_detail_stu.xml" value="0.24583333333333332" />
         <entry key="..\:/AndroidStudioProjects/FinalProject/app/src/main/res/layout/activity_main.xml" value="0.264" />
         <entry key="..\:/AndroidStudioProjects/FinalProject/app/src/main/res/layout/activity_my_info_page.xml" value="0.24583333333333332" />
         <entry key="..\:/AndroidStudioProjects/FinalProject/app/src/main/res/layout/activity_register.xml" value="0.24947916666666667" />
         <entry key="..\:/AndroidStudioProjects/FinalProject/app/src/main/res/layout/activity_request_page.xml" value="0.24583333333333332" />
-        <entry key="..\:/AndroidStudioProjects/FinalProject/app/src/main/res/layout/activity_stu_record.xml" value="0.1" />
+        <entry key="..\:/AndroidStudioProjects/FinalProject/app/src/main/res/layout/activity_stu_record.xml" value="0.264" />
         <entry key="..\:/AndroidStudioProjects/FinalProject/app/src/main/res/layout/activity_student_main.xml" value="0.264" />
         <entry key="..\:/AndroidStudioProjects/FinalProject/app/src/main/res/layout/activity_teacher_main.xml" value="0.24583333333333332" />
         <entry key="..\:/AndroidStudioProjects/FinalProject/app/src/main/res/layout/activity_teacher_main_page.xml" value="0.24583333333333332" />
+        <entry key="..\:/AndroidStudioProjects/FinalProject/app/src/main/res/layout/activity_teacher_query_cancel.xml" value="0.23125" />
+        <entry key="..\:/AndroidStudioProjects/FinalProject/app/src/main/res/layout/activity_teacher_query_record.xml" value="0.23125" />
         <entry key="..\:/AndroidStudioProjects/FinalProject/app/src/main/res/layout/list_item_stu.xml" value="0.24583333333333332" />
         <entry key="..\:/AndroidStudioProjects/FinalProject/app/src/main/res/layout/list_item_tea.xml" value="0.24583333333333332" />
       </map>

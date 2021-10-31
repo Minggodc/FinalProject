@@ -28,21 +28,24 @@ public class TeacherMain extends AppCompatActivity {
         Txueyuan.setText("学院："+xueyuan);
     }
 
+    //审核假条
     public void check(View view){
         Intent toRequest = new Intent(this, CheckPage.class);
         toRequest.putExtra("ID",id);
         startActivityForResult(toRequest, 6);
     }
 
+    //查看未销假记录
     public void leaveInfo(View view){
-//        Intent toRequest = new Intent(this, CheckPage.class);
-//        toRequest.putExtra("ID",id);
-//        startActivityForResult(toRequest, 7);
+        Intent toRequest = new Intent(this, TeacherQueryCancel.class);
+        toRequest.putExtra("ID",id);
+        startActivityForResult(toRequest, 7);
     }
 
+    //查询请假记录
     public void queryInfo(View view){
-//        Intent toRequest = new Intent(this, CheckPage.class);
-//        toRequest.putExtra("ID",id);
-//        startActivityForResult(toRequest, 8);
+        Intent toRequest = new Intent(this, TeacherQueryRecord.class);
+        toRequest.putExtra("ID",id);
+        startActivityForResult(toRequest, 8);
     }
 }

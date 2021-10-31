@@ -30,11 +30,9 @@ public class MainActivity extends AppCompatActivity {
         dbHelper = new DBHelper(getApplicationContext());
         SQLiteDatabase db = dbHelper.getReadableDatabase();
 
-
         ID = findViewById(R.id.id);
         password = findViewById(R.id.password);
     }
-
 
     public void Login(View view) {
         if (ID.getText().toString().isEmpty()||password.getText().toString().isEmpty()){
@@ -97,8 +95,11 @@ public class MainActivity extends AppCompatActivity {
                 Toast.makeText(MainActivity.this, "登录失败！！！", Toast.LENGTH_LONG).show();
             }
             db.close();
-
         }
+    }
 
+    public void toChangePWD(View view){
+        Intent intent = new Intent(this,ChangePwd.class);
+        startActivityForResult(intent,111);
     }
 }

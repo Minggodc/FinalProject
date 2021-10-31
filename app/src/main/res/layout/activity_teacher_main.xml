@@ -23,7 +23,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
-        android:text="查看销假情况"
+        android:text="查看未销假记录"
         android:textSize="30dp"
         android:onClick="leaveInfo"
         app:layout_constraintEnd_toEndOf="parent"

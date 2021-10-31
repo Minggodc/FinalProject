@@ -98,42 +98,68 @@ public class RequestPage extends AppCompatActivity {
             if(diff1<=0||diff2<0){
                 Toast.makeText(RequestPage.this, "开始结束时间不合法！！！", Toast.LENGTH_LONG).show();
             }else{
-                if (status.equals("request")){
-                    SQLiteDatabase db0 = dbHelper.getReadableDatabase();
-                    String query_stuinfo = "select XUEYUAN,GRADE from student where ID=?";
-                    Cursor cursor = db0.rawQuery(query_stuinfo,new String[]{id});
-                    cursor.moveToFirst();
-                    String xueyuan = cursor.getString(0);
-                    String grade = cursor.getString(1);
-                    cursor.close();
-                    db0.close();
 
-                    SQLiteDatabase db1 = dbHelper.getReadableDatabase();
-                    String query_tid = "select ID from teacher where XUEYUAN=? and GRADE=?";
-                    Cursor cursor1 = db1.rawQuery(query_tid,new String[]{xueyuan,grade});
-                    cursor1.moveToFirst();
-                    String tea_id = cursor1.getString(0);
-                    cursor1.close();
-                    db1.close();
+                if (status.equals("request")){ //申请假条
+                    SQLiteDatabase db3 = dbHelper.getReadableDatabase();
+                    String query3 = "select * from leave_request where ID=? and STARTTIME=?";
+                    Cursor cursor3 = db3.rawQuery(query3,new String[]{id,st});
+                    if (cursor3!=null){
+                        Toast.makeText(RequestPage.this, "已存在有相同开始时间的待审批假条！！！", Toast.LENGTH_LONG).show();
+                    }else{
+                        SQLiteDatabase db4 = dbHelper.getReadableDatabase();
+                        String query4 = "select * from on_leave where ID=? and STARTTIME=?";
+                        Cursor cursor4 = db4.rawQuery(query4,new String[]{id,st});
+                        if(cursor4!=null){
+                            Toast.makeText(RequestPage.this, "已存在有相同开始时间的假条！！！", Toast.LENGTH_LONG).show();
+                        }else{
+                            SQLiteDatabase db0 = dbHelper.getReadableDatabase();
+                            String query_stuinfo = "select XUEYUAN,GRADE from student where ID=?";
+                            Cursor cursor = db0.rawQuery(query_stuinfo,new String[]{id});
+                            cursor.moveToFirst();
+                            String xueyuan = cursor.getString(0);
+                            String grade = cursor.getString(1);
+                            cursor.close();
+                            db0.close();
 
-                    SQLiteDatabase db2 = dbHelper.getWritableDatabase();
-                    String query_leave_request = "insert into leave_request values(\""+id+"\",\""+tea_id+
-                            "\",\""+st+"\",\""+et+"\",\""+rea+"\",\""+stu_tel+"\");";
-                    db2.execSQL(query_leave_request);
-                    db2.close();
-                    startTime.setText("");
-                    endTime.setText("");
-                    reason.setText("");
-                    tel.setText("");
-                    show_result.setText("申请成功，请到请假记录中查看");
+                            SQLiteDatabase db1 = dbHelper.getReadableDatabase();
+                            String query_tid = "select ID from teacher where XUEYUAN=? and GRADE=?";
+                            Cursor cursor1 = db1.rawQuery(query_tid,new String[]{xueyuan,grade});
+                            cursor1.moveToFirst();
+                            String tea_id = cursor1.getString(0);
+                            cursor1.close();
+                            db1.close();
+
+                            SQLiteDatabase db2 = dbHelper.getWritableDatabase();
+                            String query_leave_request = "insert into leave_request values(\""+id+"\",\""+tea_id+
+                                    "\",\""+st+"\",\""+et+"\",\""+rea+"\",\""+stu_tel+"\");";
+                            db2.execSQL(query_leave_request);
+                            db2.close();
+                            startTime.setText("");
+                            endTime.setText("");
+                            reason.setText("");
+                            tel.setText("");
+                            show_result.setText("申请成功，请到请假记录中查看");
+                        }
+                        cursor4.close();
+                        db4.close();
+                    }
+                    cursor3.close();
+                    db3.close();
                 }else if (status.equals("change")){ //修改未通过申请的假条
-                    SQLiteDatabase db = dbHelper.getWritableDatabase();
-                    String query = "update leave_request set STAETTIME=\""+startTime.getText().toString().trim()+"\",ENDTIME=\""+endTime.getText().toString().trim()+
-                            "\",REASON=\""+reason.getText().toString().trim()+"\",STU_TEL=\""+tel.getText().toString().trim()+"\" where ID=\""+id+
-                            "\" and STARTTIME=\""+start+"\"";
-                    db.execSQL(query);
-                    db.close();
-                    show_result.setText("修改成功，请到请假记录中查看");
+                    SQLiteDatabase db4 = dbHelper.getReadableDatabase();
+                    String query4 = "select * from on_leave where ID=? and STARTTIME=?";
+                    Cursor cursor4 = db4.rawQuery(query4,new String[]{id,st});
+                    if(cursor4!=null){
+                        Toast.makeText(RequestPage.this, "已存在有相同开始时间的假条！！！", Toast.LENGTH_LONG).show();
+                    }else{
+                        SQLiteDatabase db = dbHelper.getWritableDatabase();
+                        String query = "update leave_request set STAETTIME=\""+startTime.getText().toString().trim()+"\",ENDTIME=\""+endTime.getText().toString().trim()+
+                                "\",REASON=\""+reason.getText().toString().trim()+"\",STU_TEL=\""+tel.getText().toString().trim()+"\" where ID=\""+id+
+                                "\" and STARTTIME=\""+start+"\"";
+                        db.execSQL(query);
+                        db.close();
+                        show_result.setText("修改成功，请到请假记录中查看");
+                    }
                 }
             }
         }

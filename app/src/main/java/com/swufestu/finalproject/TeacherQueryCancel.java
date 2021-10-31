@@ -1,6 +1,5 @@
 package com.swufestu.finalproject;
 
-import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
@@ -10,29 +9,21 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
-import android.widget.Toast;
 
 import java.util.ArrayList;
 
-public class CheckPage extends AppCompatActivity implements AdapterView.OnItemClickListener{
-
+public class TeacherQueryCancel extends AppCompatActivity implements AdapterView.OnItemClickListener {
     DBHelper dbHelper;
     ListView mylist2;
-    Intent intent;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_check_page);
+        setContentView(R.layout.activity_teacher_query_cancel);
 
-        mylist2 = findViewById(R.id.list_check_page);
+        mylist2 = findViewById(R.id.list_teacher_query_cancel);
         mylist2.setOnItemClickListener(this);
 
-        intent = getIntent();
-        showList();
-    }
-
-    public void showList(){
+        Intent intent = getIntent();
         String Tid = intent.getStringExtra("ID");
 
         dbHelper = new DBHelper(getApplicationContext());
@@ -40,8 +31,8 @@ public class CheckPage extends AppCompatActivity implements AdapterView.OnItemCl
         dbHelper = new DBHelper(getApplicationContext());
 
         SQLiteDatabase db1 = dbHelper.getReadableDatabase();
-        String query1 = "select ID,STARTTIME,ENDTIME from leave_request where TEACHER_ID=?";
-        Cursor cursor1 = db1.rawQuery(query1,new String[]{Tid});
+        String query1 = "select ID,STARTTIME,ENDTIME from on_leave where TEACHER_ID=? and CANCEL=? order by datetime(STARTTIME) asc";
+        Cursor cursor1 = db1.rawQuery(query1,new String[]{Tid,"no"});
         if (cursor1!=null){
             while(cursor1.moveToNext()){
                 String id = cursor1.getString(0);
@@ -59,7 +50,7 @@ public class CheckPage extends AppCompatActivity implements AdapterView.OnItemCl
                 temp.setName(name);
                 temp.setStart(cursor1.getString(1));
                 temp.setEnd(cursor1.getString(2));
-                temp.setResult("待审核");
+                temp.setResult("no");
                 list2.add(temp);
             }
             cursor1.close();
@@ -67,39 +58,19 @@ public class CheckPage extends AppCompatActivity implements AdapterView.OnItemCl
         db1.close();
 
         //自定义列表布局
-        StuRecordAdapter ma = new StuRecordAdapter(CheckPage.this,R.layout.list_item_tea,list2);
+        StuRecordAdapter ma = new StuRecordAdapter(TeacherQueryCancel.this,R.layout.list_item_tea,list2);
         mylist2.setAdapter(ma);
     }
-
-    //自动刷新页面
-    @Override
-    protected void onResume() {
-        super.onResume();
-    }
-
-
 
     @Override
     public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {
         Object itemAtPosition = mylist2.getItemAtPosition(position);
         StuGetRecord sgr = (StuGetRecord) itemAtPosition;
 
-
-        Intent intent = new Intent(this, DetailStu.class);
+        Intent intent = new Intent(this, DetailQuery.class);
         intent.putExtra("ID",sgr.getId());
         intent.putExtra("starttime",sgr.getStart());
-        intent.putExtra("result",sgr.getResult());
-        intent.putExtra("status","teacher");
-        startActivityForResult(intent, 10);
-    }
-
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-        if (requestCode==10&&resultCode==2){
-            showList();
-        }else{
-            Toast.makeText(CheckPage.this, "Error！！！", Toast.LENGTH_LONG).show();
-        }
+        intent.putExtra("status","cancel");
+        startActivityForResult(intent, 11);
     }
 }

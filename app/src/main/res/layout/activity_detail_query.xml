@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Detail">
+    tools:context=".DetailQuery">
 
     <TextView
         android:id="@+id/textView21"
@@ -18,12 +18,11 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/detail_ID"
+        android:id="@+id/detailquery_ID"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="10dp"
         android:layout_marginTop="30dp"
-        android:text="TextView"
         android:textSize="20dp"
         app:layout_constraintStart_toEndOf="@+id/textView21"
         app:layout_constraintTop_toTopOf="parent" />
@@ -40,15 +39,14 @@
         app:layout_constraintTop_toBottomOf="@+id/textView21" />
 
     <TextView
-        android:id="@+id/detail_name"
+        android:id="@+id/detailquery_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="10dp"
         android:layout_marginTop="15dp"
-        android:text="TextView"
         android:textSize="20dp"
         app:layout_constraintStart_toEndOf="@+id/textView24"
-        app:layout_constraintTop_toBottomOf="@+id/detail_ID" />
+        app:layout_constraintTop_toBottomOf="@+id/detailquery_ID" />
 
     <TextView
         android:id="@+id/textView27"
@@ -62,15 +60,14 @@
         app:layout_constraintTop_toBottomOf="@+id/textView24" />
 
     <TextView
-        android:id="@+id/detail_major"
+        android:id="@+id/detailquery_major"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="10dp"
         android:layout_marginTop="15dp"
-        android:text="TextView"
         android:textSize="20dp"
         app:layout_constraintStart_toEndOf="@+id/textView27"
-        app:layout_constraintTop_toBottomOf="@+id/detail_name" />
+        app:layout_constraintTop_toBottomOf="@+id/detailquery_name" />
 
     <TextView
         android:id="@+id/textView29"
@@ -84,15 +81,14 @@
         app:layout_constraintTop_toBottomOf="@+id/textView27" />
 
     <TextView
-        android:id="@+id/detail_grade"
+        android:id="@+id/detailquery_grade"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="10dp"
         android:layout_marginTop="15dp"
-        android:text="TextView"
         android:textSize="20dp"
         app:layout_constraintStart_toEndOf="@+id/textView29"
-        app:layout_constraintTop_toBottomOf="@+id/detail_major" />
+        app:layout_constraintTop_toBottomOf="@+id/detailquery_major" />
 
     <TextView
         android:id="@+id/textView31"
@@ -106,15 +102,14 @@
         app:layout_constraintTop_toBottomOf="@+id/textView29" />
 
     <TextView
-        android:id="@+id/detail_start"
+        android:id="@+id/detailquery_start"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="10dp"
         android:layout_marginTop="15dp"
-        android:text="TextView"
         android:textSize="20dp"
         app:layout_constraintStart_toEndOf="@+id/textView31"
-        app:layout_constraintTop_toBottomOf="@+id/detail_grade" />
+        app:layout_constraintTop_toBottomOf="@+id/detailquery_grade" />
 
     <TextView
         android:id="@+id/textView33"
@@ -128,15 +123,14 @@
         app:layout_constraintTop_toBottomOf="@+id/textView31" />
 
     <TextView
-        android:id="@+id/detail_end"
+        android:id="@+id/detailquery_end"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="10dp"
         android:layout_marginTop="15dp"
-        android:text="TextView"
         android:textSize="20dp"
         app:layout_constraintStart_toEndOf="@+id/textView33"
-        app:layout_constraintTop_toBottomOf="@+id/detail_start" />
+        app:layout_constraintTop_toBottomOf="@+id/detailquery_start" />
 
     <TextView
         android:id="@+id/textView36"
@@ -150,15 +144,14 @@
         app:layout_constraintTop_toBottomOf="@+id/textView33" />
 
     <TextView
-        android:id="@+id/detail_tel"
+        android:id="@+id/detailquery_tel"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="10dp"
         android:layout_marginTop="15dp"
-        android:text="TextView"
         android:textSize="20dp"
         app:layout_constraintStart_toEndOf="@+id/textView36"
-        app:layout_constraintTop_toBottomOf="@+id/detail_end" />
+        app:layout_constraintTop_toBottomOf="@+id/detailquery_end" />
 
     <TextView
         android:id="@+id/textView38"
@@ -172,76 +165,24 @@
         app:layout_constraintTop_toBottomOf="@+id/textView36" />
 
     <TextView
-        android:id="@+id/detail_reason"
+        android:id="@+id/detailquery_reason"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="10dp"
         android:layout_marginTop="15dp"
-        android:text="TextView"
         android:textSize="20dp"
         app:layout_constraintStart_toEndOf="@+id/textView38"
-        app:layout_constraintTop_toBottomOf="@+id/detail_tel" />
+        app:layout_constraintTop_toBottomOf="@+id/detailquery_tel" />
 
     <Button
         android:id="@+id/button2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        android:onClick="detailReturn"
-        android:text="返回"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/button3" />
-
-    <Button
-        android:id="@+id/button3"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
         android:layout_marginTop="50dp"
-        android:onClick="detailSubmit"
-        android:text="确认"
+        android:text="返回"
+        android:onClick="detailQueryReturn"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.526"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/y_or_n" />
-
-    <RadioGroup
-        android:id="@+id/y_or_n"
-        android:layout_width="150dp"
-        android:layout_height="50dp"
-        android:layout_marginTop="5dp"
-        android:orientation="horizontal"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.119"
-        app:layout_constraintStart_toEndOf="@+id/detail_show"
-        app:layout_constraintTop_toBottomOf="@+id/detail_reason">
-
-        <RadioButton
-            android:id="@+id/y"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:checked="true"
-            android:text="是"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/password" />
-
-        <RadioButton
-            android:id="@+id/n"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="否"
-            app:layout_constraintStart_toEndOf="@+id/radioButton"
-            app:layout_constraintTop_toBottomOf="@+id/password" />
-
-    </RadioGroup>
-
-    <TextView
-        android:id="@+id/detail_show"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="24dp"
-        android:layout_marginTop="16dp"
-        android:text="TextView"
-        android:textSize="20dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView38" />
+        app:layout_constraintTop_toBottomOf="@+id/detailquery_reason" />
 </androidx.constraintlayout.widget.ConstraintLayout>
