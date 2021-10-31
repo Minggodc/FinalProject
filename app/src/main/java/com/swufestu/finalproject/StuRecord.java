@@ -7,6 +7,7 @@ import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
@@ -18,6 +19,8 @@ public class StuRecord extends AppCompatActivity implements AdapterView.OnItemCl
     DBHelper dbHelper;
     ListView mylist1;
     String id,name;
+    public static final String TAG="StuRecord";
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -100,12 +103,14 @@ public class StuRecord extends AppCompatActivity implements AdapterView.OnItemCl
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
+        Log.i(TAG, "onActivityResult: "+resultCode);
+        Log.i(TAG, "onActivityResult: "+requestCode);
         if (requestCode==9&&resultCode==1){
             showList();
         }else if(requestCode==10&&resultCode==3){
             showList();
         }else{
-            Toast.makeText(StuRecord.this, "Error！！！", Toast.LENGTH_LONG).show();
+            Toast.makeText(StuRecord.this, "SutRecordError！！！", Toast.LENGTH_LONG).show();
         }
     }
 }

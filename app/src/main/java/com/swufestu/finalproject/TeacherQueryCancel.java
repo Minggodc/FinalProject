@@ -28,7 +28,6 @@ public class TeacherQueryCancel extends AppCompatActivity implements AdapterView
 
         dbHelper = new DBHelper(getApplicationContext());
         ArrayList<StuGetRecord> list2 = new ArrayList<StuGetRecord>();
-        dbHelper = new DBHelper(getApplicationContext());
 
         SQLiteDatabase db1 = dbHelper.getReadableDatabase();
         String query1 = "select ID,STARTTIME,ENDTIME from on_leave where TEACHER_ID=? and CANCEL=? order by datetime(STARTTIME) asc";
@@ -71,6 +70,6 @@ public class TeacherQueryCancel extends AppCompatActivity implements AdapterView
         intent.putExtra("ID",sgr.getId());
         intent.putExtra("starttime",sgr.getStart());
         intent.putExtra("status","cancel");
-        startActivityForResult(intent, 11);
+        startActivityForResult(intent, 12);
     }
 }

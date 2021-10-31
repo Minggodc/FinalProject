@@ -27,7 +27,8 @@ public class RequestPage extends AppCompatActivity {
     DBHelper dbHelper;
     TextView show_result;
     String status;
-    Button submit;
+    Button submit,retu;
+    Intent intent;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -39,14 +40,16 @@ public class RequestPage extends AppCompatActivity {
         tel = findViewById(R.id.stu_tel);
         show_result = findViewById(R.id.show_result);
 
-        Intent intent = getIntent();
+        intent = getIntent();
         id = intent.getStringExtra("ID");
         status = intent.getStringExtra("status");
         dbHelper = new DBHelper(getApplicationContext());
 
         submit = findViewById(R.id.submit);
+        retu = findViewById(R.id.request_return);
         if(status.equals("change")){
             submit.setText("修改申请信息");
+            retu.setText("返回");
             String rea = intent.getStringExtra("reason");
             String t = intent.getStringExtra("tel");
             end = intent.getStringExtra("end");
@@ -104,7 +107,7 @@ public class RequestPage extends AppCompatActivity {
                     String query3 = "select * from leave_request where ID=? and STARTTIME=?";
                     Cursor cursor3 = db3.rawQuery(query3,new String[]{id,st});
                     if (cursor3!=null){
-                        Toast.makeText(RequestPage.this, "已存在有相同开始时间的待审批假条！！！", Toast.LENGTH_LONG).show();
+                        Toast.makeText(RequestPage.this, "已存在待审批假条！！！", Toast.LENGTH_LONG).show();
                     }else{
                         SQLiteDatabase db4 = dbHelper.getReadableDatabase();
                         String query4 = "select * from on_leave where ID=? and STARTTIME=?";
@@ -145,27 +148,23 @@ public class RequestPage extends AppCompatActivity {
                     }
                     cursor3.close();
                     db3.close();
-                }else if (status.equals("change")){ //修改未通过申请的假条
-                    SQLiteDatabase db4 = dbHelper.getReadableDatabase();
-                    String query4 = "select * from on_leave where ID=? and STARTTIME=?";
-                    Cursor cursor4 = db4.rawQuery(query4,new String[]{id,st});
-                    if(cursor4!=null){
-                        Toast.makeText(RequestPage.this, "已存在有相同开始时间的假条！！！", Toast.LENGTH_LONG).show();
-                    }else{
-                        SQLiteDatabase db = dbHelper.getWritableDatabase();
-                        String query = "update leave_request set STAETTIME=\""+startTime.getText().toString().trim()+"\",ENDTIME=\""+endTime.getText().toString().trim()+
-                                "\",REASON=\""+reason.getText().toString().trim()+"\",STU_TEL=\""+tel.getText().toString().trim()+"\" where ID=\""+id+
-                                "\" and STARTTIME=\""+start+"\"";
-                        db.execSQL(query);
-                        db.close();
-                        show_result.setText("修改成功，请到请假记录中查看");
-                    }
+                }else if (status.equals("change")){ //修改待审批的假条
+                    SQLiteDatabase db = dbHelper.getWritableDatabase();
+                    String query = "update leave_request set STARTTIME=\""+startTime.getText().toString().trim()+"\",ENDTIME=\""+endTime.getText().toString().trim()+
+                            "\",REASON=\""+reason.getText().toString().trim()+"\",STU_TEL=\""+tel.getText().toString().trim()+"\" where ID=\""+id+
+                            "\" and STARTTIME=\""+start+"\"";
+                    db.execSQL(query);
+                    db.close();
+                    show_result.setText("修改成功，请到请假记录中查看");
                 }
             }
         }
     }
 
     public void requestReturn(View view){
+        if (status.equals("change")){
+            setResult(4,intent);
+        }
         finish();
     }
 

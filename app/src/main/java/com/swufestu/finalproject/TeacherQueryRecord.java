@@ -41,7 +41,6 @@ public class TeacherQueryRecord extends AppCompatActivity implements AdapterView
         }else{
             dbHelper = new DBHelper(getApplicationContext());
             ArrayList<StuGetRecord> list2 = new ArrayList<StuGetRecord>();
-            dbHelper = new DBHelper(getApplicationContext());
 
             SQLiteDatabase db1 = dbHelper.getReadableDatabase();
             String query1 = "select ID,STARTTIME,ENDTIME,CANCEL from on_leave where TEACHER_ID=? and ID=? order by datetime(STARTTIME) desc";
@@ -86,6 +85,6 @@ public class TeacherQueryRecord extends AppCompatActivity implements AdapterView
         intent.putExtra("ID",sgr.getId());
         intent.putExtra("starttime",sgr.getStart());
         intent.putExtra("status","query");
-        startActivityForResult(intent, 12);
+        startActivityForResult(intent, 13);
     }
 }

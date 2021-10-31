@@ -66,6 +66,8 @@ public class ChangePwd extends AppCompatActivity {
                             String query1 = "update student set PWD=\""+newpwd+"\" where ID=\""+id+"\"";
                             db2.execSQL(query1);
                             db2.close();
+                            Toast.makeText(ChangePwd.this, "修改成功！！！", Toast.LENGTH_LONG).show();
+                            finish();
                         }
                     }else{
                         Toast.makeText(ChangePwd.this, "账号不存在！！！", Toast.LENGTH_LONG).show();
@@ -83,6 +85,8 @@ public class ChangePwd extends AppCompatActivity {
                             String query1 = "update teacher set PWD=\""+newpwd+"\" where ID=\""+id+"\"";
                             db2.execSQL(query1);
                             db2.close();
+                            Toast.makeText(ChangePwd.this, "修改成功！！！", Toast.LENGTH_LONG).show();
+                            finish();
                         }
                     }else{
                         Toast.makeText(ChangePwd.this, "账号不存在！！！", Toast.LENGTH_LONG).show();

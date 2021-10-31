@@ -1,5 +1,6 @@
 package com.swufestu.finalproject;
 
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
@@ -8,10 +9,11 @@ import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
+import android.widget.Toast;
 
 public class DetailRequest extends AppCompatActivity {
     DBHelper dbHelper;
-    TextView Tid,Tname,Tmajor,Tgrade,Tstart,Tend,Treason,Ttel,show;
+    TextView Tid,Tname,Tmajor,Tgrade,Tstart,Tend,Treason,Ttel;
     String id,start,result,end,reason,tel;
     Intent intent;
 
@@ -20,20 +22,34 @@ public class DetailRequest extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_detail_request);
 
-        Tid = findViewById(R.id.detail_ID);
-        Tname = findViewById(R.id.detail_name);
-        Tmajor = findViewById(R.id.detail_major);
-        Tgrade = findViewById(R.id.detail_grade);
-        Tstart = findViewById(R.id.detail_start);
-        Tend = findViewById(R.id.detail_end);
-        Treason = findViewById(R.id.detail_reason);
-        Ttel = findViewById(R.id.detail_tel);
-        show = findViewById(R.id.detail_show);
+        dbHelper = new DBHelper(getApplicationContext());
+        Tid = findViewById(R.id.detailrequest_ID);
+        Tname = findViewById(R.id.detailrequest_name);
+        Tmajor = findViewById(R.id.detailrequest_major);
+        Tgrade = findViewById(R.id.detailrequest_grade);
+        Tstart = findViewById(R.id.detailrequest_start);
+        Tend = findViewById(R.id.detailrequest_end);
+        Treason = findViewById(R.id.detailrequest_reason);
+        Ttel = findViewById(R.id.detailrequest_tel);
 
         intent = getIntent();
         id = intent.getStringExtra("ID");
         start = intent.getStringExtra("starttime");
         result = intent.getStringExtra("result");
+        showInfo();
+    }
+
+    public void showInfo(){
+        Tid.setText(id);
+        Tstart.setText(start);
+
+        SQLiteDatabase db2 = dbHelper.getReadableDatabase();
+        String query2 = "select NAME,MAJOR,GRADE from student where id=?";
+        Cursor cursor2 = db2.rawQuery(query2,new String[]{id});
+        cursor2.moveToFirst();
+        Tname.setText(cursor2.getString(0));
+        Tmajor.setText(cursor2.getString(1));
+        Tgrade.setText(cursor2.getString(2));
 
         SQLiteDatabase db1 = dbHelper.getReadableDatabase();
         String query1 = "select ENDTIME,REASON,STU_TEL from leave_request where ID=? and STARTTIME=?";
@@ -64,10 +80,23 @@ public class DetailRequest extends AppCompatActivity {
         SQLiteDatabase db = dbHelper.getWritableDatabase();
         String query = "delete from leave_request where ID=\""+id+"\"";
         db.execSQL(query);
+        Toast.makeText(DetailRequest.this, "撤销成功！！！", Toast.LENGTH_LONG).show();
+        setResult(3,intent);
+        finish();
     }
 
     public void returnStuRecord(View view){
         setResult(3,intent);
         finish();
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if(requestCode==11&&resultCode==4){
+            showInfo();
+        }else{
+            Toast.makeText(DetailRequest.this, "Error！！！", Toast.LENGTH_LONG).show();
+        }
     }
 }

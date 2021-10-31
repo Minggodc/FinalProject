@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
@@ -20,6 +21,7 @@ public class DetailStu extends AppCompatActivity {
     String id,start,result,end,reason,tel,status;
     RadioGroup yn;
     Intent intent;
+    public static final String TAG = "DetailStu";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,20 +58,23 @@ public class DetailStu extends AppCompatActivity {
 
 
         if(status.equals("student")){
-            if(result.equals("no")||result.equals("未通过")){
+            if(result.equals("no")){
                 show.setText("是否销假：");
-                SQLiteDatabase db1 = dbHelper.getReadableDatabase();
-                String query1 = "select ENDTIME,REASON,STU_TEL from on_leave where ID=? and STARTTIME=?";
-                Cursor cursor1 = db1.rawQuery(query1,new String[]{id,start});
-                cursor1.moveToFirst();
-                Tend.setText(cursor1.getString(0));
-                Treason.setText(cursor1.getString(1));
-                Ttel.setText(cursor1.getString(2));
-                cursor1.close();
-                db1.close();
-            }else{
+            }else if (result.equals("未通过")){
+                show.setText("是否删除：");
+            }
+            else{
                 show.setText("Error");
             }
+            SQLiteDatabase db1 = dbHelper.getReadableDatabase();
+            String query1 = "select ENDTIME,REASON,STU_TEL from on_leave where ID=? and STARTTIME=?";
+            Cursor cursor1 = db1.rawQuery(query1,new String[]{id,start});
+            cursor1.moveToFirst();
+            Tend.setText(cursor1.getString(0));
+            Treason.setText(cursor1.getString(1));
+            Ttel.setText(cursor1.getString(2));
+            cursor1.close();
+            db1.close();
         }else if(status.equals("teacher")){
             show.setText("是否同意：");
             SQLiteDatabase db1 = dbHelper.getReadableDatabase();
@@ -88,7 +93,6 @@ public class DetailStu extends AppCompatActivity {
     }
 
     public void detailSubmit(View view){
-
         //是否
         yn = findViewById(R.id.y_or_n);
         String choose = null;
@@ -99,8 +103,6 @@ public class DetailStu extends AppCompatActivity {
                 break;
             }
         }
-
-
         if(status.equals("student")){
             if(result.equals("no")){
                 if (choose.equals("是")){
@@ -142,7 +144,7 @@ public class DetailStu extends AppCompatActivity {
             String query2 = "insert into on_leave values(\""+cursor1.getString(0)+"\",\""+cursor1.getString(1)+
                     "\",\""+cursor1.getString(2)+"\",\""+cursor1.getString(3)+"\",\""+cursor1.getString(4)+"\",\""+
                     cursor1.getString(5)+"\",\""+cancel+"\")";
-            String query3 = "delete from student where ID=\""+id+"\" and STARTTIME=\""+start+"\"";
+            String query3 = "delete from leave_request where ID=\""+id+"\" and STARTTIME=\""+start+"\"";
             cursor1.close();
             db1.close();
             SQLiteDatabase db2 = dbHelper.getWritableDatabase();
@@ -159,12 +161,13 @@ public class DetailStu extends AppCompatActivity {
 
     //返回
     public void detailReturn(View view){
-        if (result.equals("student")){
+        if (status.equals("student")){
             setResult(1,intent);
-        }else if(result.equals("teacher")){
+        }else if(status.equals("teacher")){
             setResult(2,intent);
-        }else{
-            Toast.makeText(DetailStu.this, "Error！！！", Toast.LENGTH_LONG).show();
+        }
+        else{
+            Toast.makeText(DetailStu.this, "DetailStuError！！！", Toast.LENGTH_LONG).show();
         }
         finish();
     }

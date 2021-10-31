@@ -40,7 +40,7 @@ public class CheckPage extends AppCompatActivity implements AdapterView.OnItemCl
         dbHelper = new DBHelper(getApplicationContext());
 
         SQLiteDatabase db1 = dbHelper.getReadableDatabase();
-        String query1 = "select ID,STARTTIME,ENDTIME from leave_request where TEACHER_ID=?";
+        String query1 = "select ID,STARTTIME,ENDTIME from leave_request where TEACHER_ID=? order by datetime(STARTTIME) asc";
         Cursor cursor1 = db1.rawQuery(query1,new String[]{Tid});
         if (cursor1!=null){
             while(cursor1.moveToNext()){
@@ -84,19 +84,18 @@ public class CheckPage extends AppCompatActivity implements AdapterView.OnItemCl
         Object itemAtPosition = mylist2.getItemAtPosition(position);
         StuGetRecord sgr = (StuGetRecord) itemAtPosition;
 
-
         Intent intent = new Intent(this, DetailStu.class);
         intent.putExtra("ID",sgr.getId());
         intent.putExtra("starttime",sgr.getStart());
         intent.putExtra("result",sgr.getResult());
         intent.putExtra("status","teacher");
-        startActivityForResult(intent, 10);
+        startActivityForResult(intent, 14);
     }
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if (requestCode==10&&resultCode==2){
+        if (requestCode==14&&resultCode==2){
             showList();
         }else{
             Toast.makeText(CheckPage.this, "Error！！！", Toast.LENGTH_LONG).show();

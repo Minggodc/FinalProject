@@ -21,8 +21,9 @@
         android:layout_width="260dp"
         android:layout_height="50dp"
         android:layout_marginStart="10dp"
-        android:layout_marginTop="15dp"
+        android:layout_marginTop="20dp"
         android:hint="输入旧密码"
+        android:inputType="textPassword"
         app:layout_constraintStart_toEndOf="@+id/textView9"
         app:layout_constraintTop_toBottomOf="@+id/cpwdid" />
 
@@ -32,9 +33,9 @@
         android:layout_width="260dp"
         android:layout_height="50dp"
         android:layout_marginStart="10dp"
-        android:layout_marginTop="10dp"
-        android:hint="联系方式"
-        android:numeric="integer"
+        android:layout_marginTop="15dp"
+        android:hint="确认新密码"
+        android:inputType="textPassword"
         app:layout_constraintStart_toEndOf="@+id/textView12"
         app:layout_constraintTop_toBottomOf="@+id/newpwd" />
 
@@ -44,7 +45,8 @@
         android:layout_height="50dp"
         android:layout_marginStart="10dp"
         android:layout_marginTop="10dp"
-        android:hint="理由"
+        android:hint="输入新密码"
+        android:inputType="textPassword"
         app:layout_constraintStart_toEndOf="@+id/textview10"
         app:layout_constraintTop_toBottomOf="@+id/oldpwd" />
 
@@ -52,7 +54,8 @@
         android:id="@+id/textView8"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="50dp"
+        android:layout_marginStart="40dp"
+        android:layout_marginTop="52dp"
         android:text="账号："
         android:textSize="20dp"
         app:layout_constraintStart_toStartOf="parent"
@@ -62,6 +65,7 @@
         android:id="@+id/textView9"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="40dp"
         android:layout_marginTop="40dp"
         android:text="密码："
         android:textSize="20dp"
@@ -72,7 +76,8 @@
         android:id="@+id/textview10"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="30dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="36dp"
         android:text="新密码："
         android:textSize="20dp"
         app:layout_constraintStart_toStartOf="parent"
@@ -92,13 +97,14 @@
         android:id="@+id/submitcpwd"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="272dp"
-        android:text="提交申请"
+        android:layout_marginTop="30dp"
         android:onClick="changePwd"
-        app:layout_constraintBottom_toBottomOf="parent"
+
+        android:text="提交申请"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.47"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/choosenpwd" />
 
     <RadioGroup
         android:id="@+id/choosenpwd"
