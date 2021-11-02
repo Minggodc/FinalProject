@@ -113,6 +113,8 @@ public class DetailStu extends AppCompatActivity {
                     db.execSQL(query);
                     db.close();
                     Toast.makeText(DetailStu.this, "销假成功！！！", Toast.LENGTH_LONG).show();
+                    setResult(1,intent);
+                    finish();
                 }else{
                     Toast.makeText(DetailStu.this, "No action！！！", Toast.LENGTH_LONG).show();
                 }
@@ -123,6 +125,8 @@ public class DetailStu extends AppCompatActivity {
                     db.execSQL(query);
                     db.close();
                     Toast.makeText(DetailStu.this, "删除成功！！！", Toast.LENGTH_LONG).show();
+                    setResult(1,intent);
+                    finish();
                 }else{
                     Toast.makeText(DetailStu.this, "No action！！！", Toast.LENGTH_LONG).show();
                 }
@@ -152,6 +156,8 @@ public class DetailStu extends AppCompatActivity {
             db2.execSQL(query3);
             db2.close();
             Toast.makeText(DetailStu.this, "审核成功！！！", Toast.LENGTH_LONG).show();
+            setResult(2,intent);
+            finish();
         }else{
             show.setText("Error");
             Toast.makeText(DetailStu.this, "Error！！！", Toast.LENGTH_LONG).show();
