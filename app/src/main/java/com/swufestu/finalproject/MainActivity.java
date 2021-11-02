@@ -53,7 +53,7 @@ public class MainActivity extends AppCompatActivity {
             SQLiteDatabase db = dbHelper.getReadableDatabase();
             if(choose.equals("学生")){
                 Cursor cursor = db.rawQuery("select ID,PWD,NAME from student where ID=?",new String[]{ID.getText().toString().trim()});
-                if(cursor.moveToFirst()&&cursor!=null){
+                if(cursor.moveToFirst()&&cursor.getCount()!=0){
                     String db_id = cursor.getString(0);
                     String db_pwd = cursor.getString(1);
                     String db_name = cursor.getString(2);
@@ -72,7 +72,7 @@ public class MainActivity extends AppCompatActivity {
                 cursor.close();
             }else if(choose.equals("辅导员")){
                 Cursor cursor = db.rawQuery("select ID,PWD,XUEYUAN,NAME from teacher where ID=?",new String[]{ID.getText().toString().trim()});
-                if(cursor.moveToFirst()&&cursor!=null){
+                if(cursor.moveToFirst()&&cursor.getCount()!=0){
                     String db_id = cursor.getString(0);
                     String pwd = cursor.getString(1);
                     String xueyuan = cursor.getString(2);

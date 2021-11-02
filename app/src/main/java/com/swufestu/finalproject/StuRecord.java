@@ -42,7 +42,7 @@ public class StuRecord extends AppCompatActivity implements AdapterView.OnItemCl
         SQLiteDatabase db1 = dbHelper.getReadableDatabase();
         String query1 = "select STARTTIME,ENDTIME from leave_request where id=?";
         Cursor cursor1 = db1.rawQuery(query1,new String[]{id});
-        if(cursor1!=null){
+        if(cursor1.getCount()!=0){
             while(cursor1.moveToNext()){
                 StuGetRecord temp = new StuGetRecord();
                 temp.setId(id);
@@ -59,7 +59,7 @@ public class StuRecord extends AppCompatActivity implements AdapterView.OnItemCl
         SQLiteDatabase db2 = dbHelper.getReadableDatabase();
         String query2 = "select STARTTIME,ENDTIME,CANCEL from on_leave where id=? order by datetime(STARTTIME) desc";
         Cursor cursor2 = db2.rawQuery(query2,new String[]{id});
-        if(cursor2!=null){
+        if(cursor2.getCount()!=0){
             while(cursor2.moveToNext()){
                 StuGetRecord temp = new StuGetRecord();
                 temp.setId(id);

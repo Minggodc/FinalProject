@@ -59,7 +59,7 @@ public class ChangePwd extends AppCompatActivity {
                     SQLiteDatabase db1 = dbHelper.getReadableDatabase();
                     String query = "select PWD from student where id=?";
                     Cursor cursor = db1.rawQuery(query,new String[]{id});
-                    if(cursor!=null&&cursor.moveToFirst()){
+                    if(cursor.getCount()!=0&&cursor.moveToFirst()){
                         String dbpwd = cursor.getString(0);
                         if(dbpwd.equals(oldpwd)){
                             SQLiteDatabase db2 = dbHelper.getWritableDatabase();
@@ -78,7 +78,7 @@ public class ChangePwd extends AppCompatActivity {
                     SQLiteDatabase db1 = dbHelper.getReadableDatabase();
                     String query = "select PWD from student where id=?";
                     Cursor cursor = db1.rawQuery(query,new String[]{id});
-                    if(cursor!=null&&cursor.moveToFirst()){
+                    if(cursor.getCount()!=0&&cursor.moveToFirst()){
                         String dbpwd = cursor.getString(0);
                         if(dbpwd.equals(oldpwd)){
                             SQLiteDatabase db2 = dbHelper.getWritableDatabase();

@@ -80,6 +80,7 @@ public class DetailRequest extends AppCompatActivity {
         SQLiteDatabase db = dbHelper.getWritableDatabase();
         String query = "delete from leave_request where ID=\""+id+"\"";
         db.execSQL(query);
+        db.close();
         Toast.makeText(DetailRequest.this, "撤销成功！！！", Toast.LENGTH_LONG).show();
         setResult(3,intent);
         finish();
@@ -94,6 +95,7 @@ public class DetailRequest extends AppCompatActivity {
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if(requestCode==11&&resultCode==4){
+            start = data.getStringExtra("starttime");
             showInfo();
         }else{
             Toast.makeText(DetailRequest.this, "Error！！！", Toast.LENGTH_LONG).show();

@@ -42,7 +42,7 @@ public class CheckPage extends AppCompatActivity implements AdapterView.OnItemCl
         SQLiteDatabase db1 = dbHelper.getReadableDatabase();
         String query1 = "select ID,STARTTIME,ENDTIME from leave_request where TEACHER_ID=? order by datetime(STARTTIME) asc";
         Cursor cursor1 = db1.rawQuery(query1,new String[]{Tid});
-        if (cursor1!=null){
+        if (cursor1.getCount()!=0){
             while(cursor1.moveToNext()){
                 String id = cursor1.getString(0);
                 StuGetRecord temp = new StuGetRecord();

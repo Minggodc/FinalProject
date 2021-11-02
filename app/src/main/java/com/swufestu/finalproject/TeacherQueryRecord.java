@@ -45,7 +45,7 @@ public class TeacherQueryRecord extends AppCompatActivity implements AdapterView
             SQLiteDatabase db1 = dbHelper.getReadableDatabase();
             String query1 = "select ID,STARTTIME,ENDTIME,CANCEL from on_leave where TEACHER_ID=? and ID=? order by datetime(STARTTIME) desc";
             Cursor cursor1 = db1.rawQuery(query1,new String[]{Tid,id});
-            if (cursor1!=null){
+            if (cursor1.getCount()!=0){
                 while(cursor1.moveToNext()){
                     StuGetRecord temp = new StuGetRecord();
 

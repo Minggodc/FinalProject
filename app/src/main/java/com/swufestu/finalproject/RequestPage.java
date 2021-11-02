@@ -106,13 +106,14 @@ public class RequestPage extends AppCompatActivity {
                     SQLiteDatabase db3 = dbHelper.getReadableDatabase();
                     String query3 = "select * from leave_request where ID=? and STARTTIME=?";
                     Cursor cursor3 = db3.rawQuery(query3,new String[]{id,st});
-                    if (cursor3!=null){
+                    if (cursor3.getCount()!=0){
+                        Log.i(TAG, "submit: "+cursor3.getCount());
                         Toast.makeText(RequestPage.this, "已存在待审批假条！！！", Toast.LENGTH_LONG).show();
                     }else{
                         SQLiteDatabase db4 = dbHelper.getReadableDatabase();
                         String query4 = "select * from on_leave where ID=? and STARTTIME=?";
                         Cursor cursor4 = db4.rawQuery(query4,new String[]{id,st});
-                        if(cursor4!=null){
+                        if(cursor4.getCount()!=0){
                             Toast.makeText(RequestPage.this, "已存在有相同开始时间的假条！！！", Toast.LENGTH_LONG).show();
                         }else{
                             SQLiteDatabase db0 = dbHelper.getReadableDatabase();
@@ -163,6 +164,7 @@ public class RequestPage extends AppCompatActivity {
 
     public void requestReturn(View view){
         if (status.equals("change")){
+            intent.putExtra("starttime",startTime.getText().toString().trim());
             setResult(4,intent);
         }
         finish();
